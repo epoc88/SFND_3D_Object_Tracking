@@ -1,5 +1,5 @@
 # SFND : Camera Based 3D Object Tracking Report
-Camera Based 3D Object Tracking implemented using C++ as part of project submission for Camera section of Sensor Fusion Nanodegree 
+
 -------------
 
 - ####  FP.1 Match 3D Objects
