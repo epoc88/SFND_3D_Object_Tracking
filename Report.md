@@ -1,17 +1,12 @@
-# SFND : Camera Based 3D Object Tracking 
-Camera Based 3D Object Tracking implemented using C++ as part of project submission for Camera section of Sensor Fusion Nanodegree (Udacity).
-
+# SFND : Camera Based 3D Object Tracking Report
+Camera Based 3D Object Tracking implemented using C++ as part of project submission for Camera section of Sensor Fusion Nanodegree 
 -------------
-### Solution Report : 
-
-<p align="center">
-<img src="https://github.com/hegde056/SFND_3D_Object_Tracking/blob/master/media/Result_sample.PNG" width="600" height="300" /></p> 
-
 
 - ####  FP.1 Match 3D Objects
 	- Task:  Implement the method "matchBoundingBoxes", which takes as input both the previous and the current data frames and provides as output the ids of the matched regions of interest (i.e. the boxID property). Matches must be the ones with the highest number of keypoint correspondences.
 	- Implementation : 
-		```
+
+```
 	void matchBoundingBoxes(std::vector<cv::DMatch> &matches, std::map<int, int> &bbBestMatches, DataFrame &prevFrame, DataFrame &currFrame)
 	{
 	    int curBoxCount = currFrame.boundingBoxes.size();
@@ -54,16 +49,14 @@ Camera Based 3D Object Tracking implemented using C++ as part of project submiss
 
 	}
 
-		```
-
-
+```
 
 - ####  FP.2 Compute Lidar-based TTC
  	- Task:  Compute the time-to-collision in second for all matched 3D objects using only Lidar measurements from the matched bounding boxes between current and previous frame.
 	- Implementation :
 
     Remove effects of outliers: firstly, considering only lidar points within the ego lane for TTC calculation. secondly, the average distances are considered for previous and current lidar points and used in the TTC calculation formula. 
-	```
+```
 	void computeTTCLidar(std::vector<LidarPoint> &lidarPointsPrev,
 		             std::vector<LidarPoint> &lidarPointsCurr, double frameRate, double &TTC)
 	{
@@ -100,16 +93,15 @@ Camera Based 3D Object Tracking implemented using C++ as part of project submiss
 
 	}
 
-       ```
+```
  - ####  FP.3 Associate Keypoint Correspondences with Bounding Boxes
  	- Task : Prepare the TTC computation based on camera measurements by associating keypoint correspondences to the bounding boxes which enclose them. All matches which satisfy this condition must be added to a vector in the respective bounding box.
  	- Implementation  : 
  	 Iterating over the keypoint matches and calculating the euclidean distance if the points located within the bounding box ROI. AverageDistance over all the calculated euclidean points is calculated. Then iterating over the keypoint matches , those matches whose points fall into the bounding box ROI are added to the bounding box kptMatches, as long as their distances are within threshold(2.5 has been set as variation between frames are small).
-      ```
+
+```
 	void clusterKptMatchesWithROI(BoundingBox &boundingBox, std::vector<cv::KeyPoint> &kptsPrev, std::vector<cv::KeyPoint> &kptsCurr, std::vector<cv::DMatch> &kptMatches)
 	{
-
-
 	
 	    // Find the matches within current and previous boundingBox
 	    std::vector<double> kptMatchesInROI ;
@@ -149,15 +141,14 @@ Camera Based 3D Object Tracking implemented using C++ as part of project submiss
 		}
 	    }
 	}
-      ```
-  
+```
+
  - ####  FP.4 Compute Camera-based TTC
  	- Task : Compute the time-to-collision in second for all matched 3D objects using only keypoint correspondences from the matched bounding boxes between current and previous frame
   	- Implementation :
   	The distance is computed by the keypoint correspondences matches from the previous and current frame. To get a reliable value for the size variation of the preceding vehicle, median value distance measurements are used for computing keypoints. 
 
-     
-      ```
+     ```
 	void computeTTCCamera(std::vector<cv::KeyPoint> &kptsPrev, std::vector<cv::KeyPoint> &kptsCurr, 
 		              std::vector<cv::DMatch> kptMatches, double frameRate, double &TTC, cv::Mat *visImg)
 	{
@@ -202,8 +193,6 @@ Camera Based 3D Object Tracking implemented using C++ as part of project submiss
 
 	    std::sort(distRatios.begin(), distRatios.end());
 
-
-
 	    double medianDistRatio;
 	    if (distRatios.size()%2==1)
 	    {
@@ -216,9 +205,10 @@ Camera Based 3D Object Tracking implemented using C++ as part of project submiss
 	    }
 
 	    TTC = - 1 / (frameRate * (1 - medianDistRatio));      //  -dT/(1 - medianDistRatio)
-
 	}
-  
+```
+```
+
  - ####  FP.5 Performance Evaluation 1	
  	- Task : Find examples where the TTC estimate of the Lidar sensor does not seem plausible. Describe your observations and provide a sound argumentation why you think this happened.
   	- Evaluation :
