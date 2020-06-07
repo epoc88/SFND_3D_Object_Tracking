@@ -238,21 +238,18 @@
 <img src="https://github.com/epoc88/SensorFusion_3DObjectTracking/blob/master/docs/FP6.png" width="900" height="450" /> 
 </p>
 
+ * As it can be seen from the graphs, the camera TTC calculation is way off at some frames. Keypoint mismatch between frames and slight shift of keypoints in next frame is observed in matching. This results to inaccurate calculation of TTC.
 
  * TOP3 detector / descriptor combinations are chosen based on the achieve minimal processing time with significant matches 
  	Best combinations : 
 	`FAST + ORB`, 
     	`SIFT + BREAK`,
        	`SIFT + SIFT`,
-	
-        
-
- * As it can be seen from the graphs, the camera TTC calculation is way off at some frames. Keypoint mismatch between frames and slight shift of keypoints in next frame is observed in matching. This results to inaccurate calculation of TTC.
- * The model assumed for the TTC calculation is constant velocity model. However in the real scenario the preceding vehicle accelerates/decelerates and this affects the accuracy of the TTC calculation.
 
 
--------------
-	
+ * The model for the TTC calculation assumes a constant velocity model. However in the real scenario the preceding vehicle accelerates and decelerates and this affects the accuracy of the TTC calculation.
+
+
 
 
 
