@@ -217,6 +217,9 @@
    Some examples of not plausable cases :
  
   	<p align="center">
+	<img src= "https://github.com/epoc88/SensorFusion_3DObjectTracking/blob/master/docs/3.png" width=900 height=300>
+	<img src= "https://github.com/epoc88/SensorFusion_3DObjectTracking/blob/master/docs/13.png" width=900 height=300>
+	<img src= "https://github.com/epoc88/SensorFusion_3DObjectTracking/blob/master/docs/14.png" width=900 height=300>
     </p>
     
    
