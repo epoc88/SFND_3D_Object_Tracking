@@ -230,17 +230,21 @@
   
  - #### FP.6 Performance Evaluation 2	
  	- Task : Run several detector / descriptor combinations and look at the differences in TTC estimation. Find out which methods perform best and also include several examples where camera-based TTC estimation is way off. As with Lidar, describe your observations again and also look into potential reasons.
-  	- Evaluation :
- 
-    <p align="center">
-    </p> 
+  	- Evaluation : The raw result [results.xlsx](https://github.com/epoc88/SensorFusion_3DObjectTracking/blob/master/docs/results.xlsx), which provide details of total number of keypoint found, keypoint matches, TTCLidar and TTC camera frame by frame for all combination of detector and descriptors. The performence data in terms of TTC camera [FP6_detectors_descriptors_performance.xlsx](https://github.com/epoc88/SensorFusion_3DObjectTracking/blob/master/docs/FP6_detectors_descriptors_performance.xlsx)
+
+
+</p>	
+<p align="center">
+<img src="https://github.com/epoc88/SensorFusion_3DObjectTracking/blob/master/docs/FP6.png" width="900" height="450" /> 
+</p>
+
 
  * TOP3 detector / descriptor combinations are chosen based on the achieve minimal processing time with significant matches 
  	Best combinations : 
-    	`FAST + BRIEF`,
-       	`FAST + BRISK`,
-	`FAST + ORB`
-
+	`FAST + ORB`, 
+    	`SIFT + BREAK`,
+       	`SIFT + SIFT`,
+	
         
 
  * As it can be seen from the graphs, the camera TTC calculation is way off at some frames. Keypoint mismatch between frames and slight shift of keypoints in next frame is observed in matching. This results to inaccurate calculation of TTC.
